@@ -4,7 +4,6 @@ const dotenv = require('dotenv');
 const colors = require('colors');
 const morgan = require('morgan');
 const connectDB = require('./db');
-const cors = require('cors')
 
 dotenv.config();
 
@@ -14,8 +13,6 @@ const transactions = require('./routes/transactions');
 
 const app = express();
 
-app.use(cors())
-
 app.use(express.json());
 
 if(process.env.NODE_ENV === 'development') {
@@ -23,6 +20,7 @@ if(process.env.NODE_ENV === 'development') {
 }
 
 app.use('/api/v1/transactions', transactions);
+
 
 if(process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
